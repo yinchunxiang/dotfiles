@@ -1,18 +1,16 @@
-export PATH="/opt/homebrew/bin:$PATH"
 
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
+# Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
+# load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME=""
-# ZSH_THEME="ys"
-# ZSH_THEME="candy"
+# ZSH_THEME="robbyrussell"
+ZSH_THEME="candy"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -74,14 +72,7 @@ ZSH_THEME=""
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    git 
-    z
-    zsh-autosuggestions
-    #zsh-syntax-highlighting
-    extract
-    direnv
-)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -96,225 +87,101 @@ source $ZSH/oh-my-zsh.sh
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-#   export EDITOR='mvim'
+#   export EDITOR='nvim'
 # fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# export ARCHFLAGS="-arch $(uname -m)"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# Set personal aliases, overriding those provided by Oh My Zsh libs,
+# plugins, and themes. Aliases can be placed here, though Oh My Zsh
+# users are encouraged to define aliases within a top-level file in
+# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
+# - $ZSH_CUSTOM/aliases.zsh
+# - $ZSH_CUSTOM/macos.zsh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias gdev="ssh chunxiang.yin@10.129.111.104 -A"
-alias gss="cd ~/Projects/videosearch-ss/"
-alias gus="cd ~/Projects/searchplt-us/"
-alias gsa="cd ~/Projects/search-admin-service-monitor-api"
+alias tailf="tail -f"
+alias v="nvim"
+alias cc="claude"
+alias sracc="cd /root/.sra-toolkit;claude"
 
-alias smcus="smc services enter --ecp -e live searchplt-us-live-id"
-alias smcss="smc services enter --ecp -e live videosearch-ss-live-id"
-alias tailf='tail -f'
-alias pwdx='lsof -a -d cwd -p'
+# for spark/hadoop
+if [ -f /etc/profile.d/driver.sh ]; then
+    source /etc/profile.d/driver.sh
+fi
 
-alias gbt='ssh  ubuntu@23.234.251.224 -p 11222'
-#alias cat='bat'
-alias ls='ls --color'
-alias v='nvim'
-alias gdv='cd /Users/chunxiang.yin/DeepVespa'
-alias gdv9='ssh coder.almalinux8-dev.main'
-alias cat='bat'
-
-
-
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-killf() {
-  ps -ef | fzf --header "Select process to kill" | awk "{print \\$2}" | xargs kill -9
-}
-alias p='fd --type f | fzf --preview "bat --color=always {}"'
-
-
-# ss需要用到的配置
-export CID=localdev
-export SP_UNIX_SOCKET=/tmp/spex.sock
-
-
-# go 相关
-#export GOPATH="$HOME/go"
-#export GOROOT="/opt/homebrew/Cellar/go@1.18/1.18.6/libexec"
-#export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
-#
-#export PATH="/opt/homebrew/opt/go@1.18/bin:$PATH"
-export PATH="$PATH:$HOME/go/bin"
-
-# >>> xmake >>>
-[[ -s "$HOME/.xmake/profile" ]] && source "$HOME/.xmake/profile" # load xmake profile
-# <<< xmake <<<
-export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
-
-
-
-export DOCKER_HOST=unix:///Users/chunxiang.yin/.colima/default/docker.sock
-
-export VESPA_CLI_HOME=/tmp
-export GITSTATUS_LOG_LEVEL=DEBUG
-
-
-
-function mcs {
-  model_prompt="$*"
-  magic-cli suggest "$model_prompt"
-}
-
-function mcf {
-  model_prompt="$*"
-  magic-cli search "$model_prompt"
-}
-
-function mca {
-  model_prompt="$*"
-  magic-cli ask "$model_prompt"
-}
-
-# jdk
-export JAVA_HOME=/opt/homebrew/opt/openjdk@25
-export PATH="/opt/homebrew/opt/openjdk@25/bin:$PATH"
-
-# ccache
-# export PATH="/opt/homebrew/opt/ccache/libexec:$PATH"
-
-
-# gh copilot — 懒加载 ghcs / ghce
-# gh copilot: 延迟到第一次调用时初始化
-# gh copilot alias 实际上只定义了 ghcs 和 ghce 两个函数，所以占位这两个就够了
-# 删掉 eval "$(gh copilot alias -- zsh)"
-ghcs() {
-    unfunction ghcs ghce 2>/dev/null
-    eval "$(gh copilot alias -- zsh)"
-    ghcs "$@"
-}
-ghce() {
-    unfunction ghcs ghce 2>/dev/null
-    eval "$(gh copilot alias -- zsh)"
-    ghce "$@"
-}
-
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-#__conda_setup="$('/Users/chunxiang.yin/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-#if [ $? -eq 0 ]; then
-#    eval "$__conda_setup"
-#else
-#    if [ -f "/Users/chunxiang.yin/miniforge3/etc/profile.d/conda.sh" ]; then
-#        . "/Users/chunxiang.yin/miniforge3/etc/profile.d/conda.sh"
-#    else
-#        export PATH="/Users/chunxiang.yin/miniforge3/bin:$PATH"
-#    fi
+# for miniconda
+#if [ -f /root/miniconda3/bin/activate ]; then
+#    source /root/miniconda3/bin/activate
+#    true
 #fi
-#unset __conda_setup
-#
-#if [ -f "/Users/chunxiang.yin/miniforge3/etc/profile.d/mamba.sh" ]; then
-#    . "/Users/chunxiang.yin/miniforge3/etc/profile.d/mamba.sh"
-#fi
-# <<< conda initialize <<<
+
+# for git store pwd
+git config --global credential.helper store
+
+# conan
+export CC=/usr/bin/clang-8-with-gcc-8-toolchain
+export CXX=/usr/bin/clang++-8-with-gcc-8-toolchain
+export CONAN_USERNAME=user
+export CONAN_CHANNEL=stable
+export CONAN_REVISIONS_ENABLED=1
+
+
+
 
 # devbox
-#eval "$(direnv hook zsh)" 2>/dev/null
+eval "$(devbox global shellenv --init-hook)"
+export PATH=/root/bin:$PATH
+export DEVBOX_HOME=/root/.devbox
 
-# 删掉 eval "$(devbox global shellenv --init-hook)" 2>/dev/null 
-# devbox: 延迟初始化
-devbox() {
-    unfunction devbox
-    eval "$(command devbox global shellenv --init-hook)" 2>/dev/null
-    command devbox "$@"
-}
-DEVBOX_NO_PROMPT=false
+# direnv
+eval "$(direnv hook zsh)"
 
-
-# llvm
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
-
-export PATH="/opt/homebrew/opt/gnu-getopt/bin:$PATH"
-
-# FlameGraph
-export PATH="/Users/chunxiang.yin/GitHub/FlameGraph:$PATH"
-
-# goenv
-# 确保你的配置文件中是这样写的，而不是直接指向具体的 Cellar 目录
-export GOENV_ROOT="$HOME/.goenv"
-export PATH="$GOENV_ROOT/bin:$GOENV_ROOT/shims:$PATH"
-# 懒加载 goenv 命令本身（仅在你手动执行 goenv install 等操作时才需要完整初始化）
-goenv() {
-    unfunction goenv
-    eval "$(command goenv init -)"
-    goenv "$@"
-}
-
-export GOROOT=$(go env GOROOT)
-export PATH=$PATH:$GOROOT/bin
+#fzf
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
 
 
-# starship
-#eval "$(starship init zsh)"
+# colima
+export DOCKER_HOST=unix:///root/.colima/default/docker.sock
 
 
-#npm
-# Homebrew 安装的 npm，使用实际路径代替
-# export PATH="$(npm prefix -g)/bin:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"
+
+# go
+export PATH="$(go env GOPATH)/bin:$PATH"
+export GOPRIVATE=git.garena.com
 
 
-export EDITOR="nvim"
-export VISUAL="$EDITOR"
-
-# SSH SOCKS 代理由 launchd 管理，见 ~/Library/LaunchAgents/com.user.ssh-socks-proxy.plist
-alias socks-up='launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.user.ssh-socks-proxy.plist'
-alias socks-down='launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.user.ssh-socks-proxy.plist'
-alias socks-log='tail -f /tmp/ssh-socks-proxy.err'
+# claude
+export CLAUDE_CODE_DISABLE_TERMINAL_TITLE=1
 
 
-# 设置终端标题（包含主机名）
-case "$TERM" in
-xterm*|rxvt*|alacritty*|wezterm*)
-    precmd() {
-        if [[ -n "$SSH_CONNECTION" ]]; then
-            # SSH 会话：显示 user@hostname:directory
-            print -Pn "\e]0;%n@%m: %~\a"
-        else
-            # 本地会话：显示 user:directory
-            print -Pn "\e]0;%n: %~\a"
-        fi
-    }
-    ;;
-esac
+# 在远程服务器的 ~/.zshrc 中
+autoload -Uz add-zsh-hook
 
-
-eval "$(starship init zsh)"
-
-# bun completions
-[ -s "/Users/chunxiang.yin/.bun/_bun" ] && source "/Users/chunxiang.yin/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# mise
-# 日常命令走 shims 零开销，mise 命令本身才懒加载。
-export PATH="$HOME/.local/share/mise/shims:$PATH"
-# 删掉 eval "$(~/.local/bin/mise activate zsh)"
-# mise: 延迟到第一次调用
-mise() {
-    unfunction mise
-    eval "$(~/.local/bin/mise activate zsh)"
-    mise "$@"
+function set_tab_title() {
+    local title
+    
+    if [[ -n "$SSH_CONNECTION" ]]; then
+        # SSH 会话：显示主机名
+        title="coder.dev1"
+    else
+        # 本地会话：显示当前目录
+        title="coder.dev1"
+    fi
+    
+    # 设置终端标题
+    echo -ne "\033]0;${title}\007"
 }
 
-# 
+# 添加钩子
+add-zsh-hook precmd set_tab_title
+add-zsh-hook preexec set_tab_title
+export PATH="$HOME/.local/bin:$PATH"
+
+
 set -o vi
