@@ -57,4 +57,3 @@ github = "ohmyzsh/ohmyzsh"
 dir = "plugins/extract"
 use = ["extract.plugin.zsh"]
 apply = ["defer"]
-
