@@ -7,6 +7,12 @@ alias ls='ls --color'
 alias claude='claude --dangerously-skip-permissions'
 alias codex='codex --dangerously-bypass-approvals-and-sandbox'
 
+@codex() {
+  codex exec "$@"
+}
+
+
+
 
 # Plugin bootstrap
 autoload -Uz compinit
