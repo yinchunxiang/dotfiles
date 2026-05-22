@@ -1,0 +1,60 @@
+shell = "zsh"
+
+# 延迟加载
+[templates]
+defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks?.post | nl }}"
+
+# zsh-defer 必须放在最前面，且不能自身被 defer
+[plugins.zsh-defer]
+github = "romkatv/zsh-defer"
+
+
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+apply = ["defer"]
+
+[plugins.fast-syntax-highlighting]
+github = "zdharma-continuum/fast-syntax-highlighting"
+apply = ["defer"]
+
+#[plugins.zsh-syntax-highlighting]
+#github = "zsh-users/zsh-syntax-highlighting"
+#apply = ["defer"]
+
+
+[plugins.fzf]
+github = "junegunn/fzf"
+use = ["shell/completion.zsh", "shell/key-bindings.zsh"]
+apply = ["defer"]
+
+
+#inline 的不能延迟加载
+
+[plugins.fzf-config]
+inline = '''
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse"
+'''
+
+[plugins.fzf-tab]
+github = "Aloxaf/fzf-tab"
+apply = ["defer"]
+
+
+[plugins.zoxide]
+inline = 'eval "$(zoxide init zsh)"'
+
+[plugins.direnv]
+inline = 'eval "$(direnv hook zsh)"'
+
+[plugins.ohmyzsh-git]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/git"
+use = ["git.plugin.zsh"]
+apply = ["defer"]
+
+[plugins.ohmyzsh-extract]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins/extract"
+use = ["extract.plugin.zsh"]
+apply = ["defer"]
+
