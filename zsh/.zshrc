@@ -22,5 +22,9 @@ eval "$(sheldon source)"
 
 eval "$(mise activate zsh)"
 
-export STARSHIP_HOSTNAME="coder.dev2"
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
 eval "$(starship init zsh)"
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+
+. "$HOME/.local/bin/env"
