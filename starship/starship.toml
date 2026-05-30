@@ -3,3 +3,14 @@
 
 # Inserts a blank line between shell prompts
 add_newline = true
+
+
+[hostname]
+ssh_only = false
+disabled = false
+format = '[$hostname]($style) '
+
+[hostname.aliases]
+"coder-chunxiangyin-dev1-6f57bc6fcc-bthz4" = "coder.dev1"
+"coder-chunxiangyin-dev2-775445566d-2lm68" = "coder.dev2"
+

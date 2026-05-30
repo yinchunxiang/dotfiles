@@ -27,4 +27,4 @@ eval "$(starship init zsh)"
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 
-. "$HOME/.local/bin/env"
+[[ -r "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
