@@ -4,7 +4,6 @@
 # Inserts a blank line between shell prompts
 add_newline = true
 
-
 [hostname]
 ssh_only = false
 disabled = false
@@ -14,3 +13,7 @@ format = '[$hostname]($style) '
 "coder-chunxiangyin-dev1-6f57bc6fcc-bthz4" = "coder.dev1"
 "coder-chunxiangyin-dev2-775445566d-2lm68" = "coder.dev2"
 
+[directory]
+truncation_length = 0       # 设置为 0 表示完全不截断路径
+fish_style_pwd_dir_length = 0 # 确保不会像 fish shell 那样把父目录缩写为单个字母
+truncate_to_repo = false    # 设置为 false，即使在 Git 仓库中也显示完整路径
