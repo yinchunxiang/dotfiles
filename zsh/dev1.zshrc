@@ -1,3 +1,7 @@
+
+alias sracl='cd /home/coder/sra-toolkit; claude'
+
+
 # 自定义修改标题的函数
 set_ghostty_title() {
   # %n = 用户名, %m = 短主机名
