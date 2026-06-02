@@ -1,4 +1,3 @@
-
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 
 alias v='nvim'
@@ -37,3 +36,8 @@ case "$(hostname)" in
     [[ -r "${ZDOTDIR:-$HOME}/dev2.zshrc" ]] && source "${ZDOTDIR:-$HOME}/dev2.zshrc"
     ;;
 esac
+
+
+# 最后加载 local 配置
+[[ -r "${ZDOTDIR:-$HOME}/local.zshrc" ]] && source "${ZDOTDIR:-$HOME}/local.zshrc"
+
