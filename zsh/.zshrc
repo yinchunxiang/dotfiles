@@ -1,4 +1,3 @@
-
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 
 alias v='nvim'
@@ -43,3 +42,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
+
+# 最后加载 local 配置
+[[ -r "${ZDOTDIR:-$HOME}/local.zshrc" ]] && source "${ZDOTDIR:-$HOME}/local.zshrc"
