@@ -1,0 +1,13 @@
+[tools]
+go = "latest"
+uv = "latest"
+
+[env]
+GOPATH = "{{env.HOME}}/go"
+GOBIN = "{{env.HOME}}/go/bin"
+_.path = ["{{env.HOME}}/go/bin"]
+
+
+[settings]
+# 当进入包含 uv.lock 的目录时，mise 会自动把 uv 创建的 .venv 注入到当前环境变量
+python.uv_venv_auto = "create|source"
