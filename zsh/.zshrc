@@ -5,6 +5,7 @@ alias codex='codex --ask-for-approval never'
 alias ls='ls --color'
 alias claude='claude --dangerously-skip-permissions'
 alias codex='codex --dangerously-bypass-approvals-and-sandbox'
+alias ll='ls -al'
 
 @codex() {
   codex exec "$@"
