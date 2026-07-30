@@ -9,10 +9,6 @@ bindkey -e
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/coder/.zshrc'
 
-autoload -Uz compinit
-compinit
-
-
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 export PATH="$HOME/.local/bin:$PATH"
 
