@@ -11,7 +11,7 @@ format = '[$hostname]($style) '
 
 [hostname.aliases]
 "coder-chunxiangyin-dev1-69bdcdc74b-j2qqs" = "coder.dev1"
-"coder-chunxiangyin-dev2-775445566d-2lm68" = "coder.dev2"
+"coder-chunxiangyin-dev2-688ddd954d-sz9md" = "coder.dev2"
 
 [directory]
 truncation_length = 0       # 设置为 0 表示完全不截断路径
