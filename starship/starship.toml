@@ -10,6 +10,7 @@ disabled = false
 format = '[$hostname]($style) '
 
 [hostname.aliases]
+"D9Q6WNCWJD" = "localhost"
 "coder-chunxiangyin-dev1-69bdcdc74b-j2qqs" = "coder.dev1"
 "coder-chunxiangyin-dev2-688ddd954d-sz9md" = "coder.dev2"
 

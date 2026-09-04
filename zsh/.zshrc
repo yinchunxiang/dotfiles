@@ -9,7 +9,14 @@ bindkey -e
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/coder/.zshrc'
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+# Homebrew (Apple Silicon, Intel macOS, or Linuxbrew)
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+elif [[ -x /usr/local/bin/brew ]]; then
+  eval "$(/usr/local/bin/brew shellenv zsh)"
+elif [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+fi
 export PATH="$HOME/.local/bin:$PATH"
 
 alias v='nvim'
@@ -30,15 +37,19 @@ alias tailf='tail -f'
 # Plugin bootstrap
 autoload -Uz compinit
 compinit
-eval "$(sheldon source)"
+if command -v sheldon >/dev/null 2>&1; then
+  eval "$(sheldon source)"
+fi
 
 
-eval "$(mise activate zsh)"
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate zsh)"
+fi
 
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
-eval "$(starship init zsh)"
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
 
 [[ -r "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
 
